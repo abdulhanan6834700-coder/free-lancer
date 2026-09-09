@@ -1,73 +1,86 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================
-       MOBILE MENU
-    ========================= */
-
     const navToggle = document.getElementById("navToggle");
     const primaryNav = document.getElementById("primaryNav");
 
     if (navToggle && primaryNav) {
 
         navToggle.addEventListener("click", () => {
+
             primaryNav.classList.toggle("open");
+
+            navToggle.setAttribute(
+                "aria-expanded",
+                primaryNav.classList.contains("open")
+            );
+
         });
 
-        const links = primaryNav.querySelectorAll("a");
-
-        links.forEach(link => {
+        primaryNav.querySelectorAll("a").forEach(link => {
 
             link.addEventListener("click", () => {
+
                 primaryNav.classList.remove("open");
+
             });
 
         });
+
     }
 
 
-    /* =========================
-       SCROLL REVEAL ANIMATION
-    ========================= */
-
     const elements = document.querySelectorAll(
-        ".service-card, .portfolio-card, .process-item, .service-row, .about-panel, .contact-box"
+        ".service-card, .portfolio-card, .process-item, .service-row, .about-panel, .contact-box, .stat, .testimonial"
     );
 
+
     elements.forEach(element => {
+
         element.classList.add("reveal");
+
     });
 
 
-    const observer = new IntersectionObserver(
-        (entries, observer) => {
+    if ("IntersectionObserver" in window) {
 
-            entries.forEach(entry => {
+        const observer = new IntersectionObserver(
+            (entries, observer) => {
 
-                if (entry.isIntersecting) {
+                entries.forEach(entry => {
 
-                    entry.target.classList.add("show");
+                    if (entry.isIntersecting) {
 
-                    observer.unobserve(entry.target);
+                        entry.target.classList.add("show");
 
-                }
+                        observer.unobserve(entry.target);
 
-            });
+                    }
 
-        },
-        {
-            threshold: 0.12
-        }
-    );
+                });
 
-
-    elements.forEach(element => {
-        observer.observe(element);
-    });
+            },
+            {
+                threshold: 0.12
+            }
+        );
 
 
-    /* =========================
-       CONTACT FORM
-    ========================= */
+        elements.forEach(element => {
+
+            observer.observe(element);
+
+        });
+
+    } else {
+
+        elements.forEach(element => {
+
+            element.classList.add("show");
+
+        });
+
+    }
+
 
     const contactForm =
         document.getElementById("contactForm");
@@ -77,25 +90,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         contactForm.addEventListener(
             "submit",
-            function(event) {
+            (event) => {
 
                 event.preventDefault();
 
+
                 const name =
-                    document.getElementById("name")
-                    ?.value.trim();
+                    document.getElementById("name")?.value.trim();
 
                 const email =
-                    document.getElementById("email")
-                    ?.value.trim();
+                    document.getElementById("email")?.value.trim();
 
                 const service =
-                    document.getElementById("service")
-                    ?.value;
+                    document.getElementById("service")?.value || "";
 
                 const message =
-                    document.getElementById("message")
-                    ?.value.trim();
+                    document.getElementById("message")?.value.trim();
 
 
                 if (!name || !email || !message) {
@@ -105,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
                     return;
+
                 }
 
 
@@ -116,28 +127,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const body =
                     encodeURIComponent(
+                        `Name: ${name}
+Email: ${email}
+Service: ${service}
 
-                        "Name: " +
-                        name +
-
-                        "\nEmail: " +
-                        email +
-
-                        "\nService: " +
-                        service +
-
-                        "\n\nProject Details:\n" +
-                        message
-
+Project Details:
+${message}`
                     );
 
 
                 window.location.href =
-                    "mailto:abdulhanan6834700@gmail.com" +
-                    "?subject=" +
-                    subject +
-                    "&body=" +
-                    body;
+                    "mailto:abdulhanan6834700@gmail.com?subject="
+                    + subject
+                    + "&body="
+                    + body;
 
             }
         );
@@ -145,18 +148,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================
-       CURRENT YEAR
-    ========================= */
+    document
+        .querySelectorAll(".current-year")
+        .forEach(element => {
 
-    const yearElements =
-        document.querySelectorAll(".current-year");
+            element.textContent =
+                new Date().getFullYear();
 
-    yearElements.forEach(element => {
-
-        element.textContent =
-            new Date().getFullYear();
-
-    });
+        });
 
 });

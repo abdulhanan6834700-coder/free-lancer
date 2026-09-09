@@ -1,7 +1,12 @@
+/* =========================================================
+   PROFESSIONAL PORTFOLIO WEBSITE
+   FINAL STYLE SHEET
+========================================================= */
 
-/* =========================
+
+/* =========================================================
    GLOBAL RESET
-========================= */
+========================================================= */
 
 * {
     margin: 0;
@@ -16,152 +21,383 @@ html {
 body {
     font-family: "Poppins", Arial, sans-serif;
     background: #ffffff;
-    color: #222;
+    color: #222222;
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
 
-/* =========================
+/* =========================================================
    HEADER
-========================= */
+========================================================= */
 
 .site-header {
     width: 100%;
-    background: #ffffff;
-    padding: 18px 6%;
+    min-height: 88px;
+
+    padding: 0 7%;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     position: sticky;
     top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+    z-index: 9999;
+
+    /* PROFESSIONAL BLUE BACKGROUND */
+    background: linear-gradient(
+        135deg,
+        #062f3d 0%,
+        #075664 50%,
+        #063b49 100%
+    );
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+
+    animation: headerSlideDown 0.7s ease forwards;
 }
 
 
-/* =========================
-   LOGO / NAME
-========================= */
+/* =========================================================
+   HEADER ANIMATION
+========================================================= */
 
+@keyframes headerSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   LOGO / NAME
+========================================================= */
+
+.site-header h1,
 .site-logo,
 .logo,
-.brand,
-.site-header h1 {
+.brand {
+    margin: 0;
+
     font-family: Georgia, "Times New Roman", serif;
-    font-size: 28px;
+
+    font-size: 30px;
     font-weight: 700;
-    text-decoration: none;
+
     letter-spacing: 0.5px;
+
     white-space: nowrap;
+
+    text-decoration: none;
+
+    display: inline-flex;
+    align-items: center;
+
+    animation: logoAnimation 0.9s ease forwards;
 }
 
-/* ABDUL */
 
+/* Logo animation */
+
+@keyframes logoAnimation {
+    from {
+        opacity: 0;
+        transform: translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* =========================================================
+   ABDUL NAME
+========================================================= */
+
+.site-header h1 .first-name,
 .site-logo .first-name,
 .logo .first-name,
-.brand .first-name,
-.site-header h1 .first-name {
-    color: #d4a017 !important;
+.brand .first-name {
+    color: #f2c14e !important;
+
     display: inline-block;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
 }
 
-/* HANAN */
 
+/* Abdul hover */
+
+.site-header h1 .first-name:hover,
+.site-logo .first-name:hover,
+.logo .first-name:hover,
+.brand .first-name:hover {
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   HANAN NAME
+========================================================= */
+
+.site-header h1 .last-name,
 .site-logo .last-name,
 .logo .last-name,
-.brand .last-name,
-.site-header h1 .last-name {
-    color: #008f7a !important;
+.brand .last-name {
+    color: #ffffff !important;
+
     display: inline-block;
+
+    margin-left: 7px;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
 }
 
 
-/* =========================
+/* Hanan hover */
+
+.site-header h1 .last-name:hover,
+.site-logo .last-name:hover,
+.logo .last-name:hover,
+.brand .last-name:hover {
+    color: #f2c14e !important;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
    NAVIGATION
-========================= */
+========================================================= */
 
 .site-header nav {
     display: flex;
     align-items: center;
-    gap: 28px;
+
+    gap: 30px;
 }
+
+
+/* Navigation links */
 
 .site-header nav a {
-    color: #222;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
     position: relative;
-    transition: 0.3s ease;
+
+    padding: 8px 0;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
 }
 
+
+/* Navigation hover */
+
 .site-header nav a:hover {
-    color: #008f7a;
+    color: #f2c14e;
+
+    transform: translateY(-2px);
 }
+
+
+/* =========================================================
+   NAVIGATION UNDERLINE ANIMATION
+========================================================= */
 
 .site-header nav a::after {
     content: "";
+
     position: absolute;
+
     left: 0;
-    bottom: -6px;
+    bottom: 0;
+
     width: 0;
     height: 2px;
-    background: #d4a017;
-    transition: width 0.3s ease;
+
+    background: #f2c14e;
+
+    border-radius: 10px;
+
+    transition: width 0.35s ease;
 }
 
-.site-header nav a:hover::after {
+
+/* Hover + active */
+
+.site-header nav a:hover::after,
+.site-header nav a.active::after {
     width: 100%;
 }
 
 
-/* =========================
-   MOBILE HEADER
-========================= */
+/* Active link */
 
-@media (max-width: 768px) {
+.site-header nav a.active {
+    color: #f2c14e;
+}
 
-    .site-header {
-        padding: 15px 5%;
+
+/* =========================================================
+   CONTACT ME BUTTON
+========================================================= */
+
+.site-header nav a:last-child {
+    padding: 13px 22px;
+
+    color: #062f3d;
+
+    background: #f2c14e;
+
+    border: 2px solid #f2c14e;
+
+    border-radius: 7px;
+
+    font-weight: 700;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* Remove underline from button */
+
+.site-header nav a:last-child::after {
+    display: none;
+}
+
+
+/* Button hover */
+
+.site-header nav a:last-child:hover {
+    color: #062f3d;
+
+    background: #ffffff;
+
+    border-color: #ffffff;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(242, 193, 78, 0.25);
+}
+
+
+/* =========================================================
+   HEADER LIGHT SHINE EFFECT
+========================================================= */
+
+.site-header::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    pointer-events: none;
+
+    animation: headerShine 7s infinite;
+}
+
+
+@keyframes headerShine {
+
+    0% {
+        left: -120%;
     }
 
-    .site-logo,
-    .logo,
-    .brand,
-    .site-header h1 {
-        font-size: 24px;
+    45% {
+        left: 130%;
     }
 
-    .site-header nav {
-        gap: 14px;
-    }
-
-    .site-header nav a {
-        font-size: 13px;
+    100% {
+        left: 130%;
     }
 }
 
 
-/* =========================
-   SMALL MOBILE
-========================= */
+/* =========================================================
+   GENERAL SECTION
+========================================================= */
 
-@media (max-width: 500px) {
+section {
+    position: relative;
 
-    .site-header {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .site-header nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px 18px;
-    }
-
-    .site-logo,
-    .logo,
-    .brand,
-    .site-header h1 {
-        font-size: 25px;
-    }
+    padding: 80px 7%;
 }
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button,
+.btn {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   IMAGES
+========================================================= */
+
+img {
+    max-width: 100%;
+    height: auto;
+
+    display: block;
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+a {
+    transition
